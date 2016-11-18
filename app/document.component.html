@@ -1,0 +1,20 @@
+<table class="table" show-filter="true">
+    <tr>
+        <th>Document Type</th>
+        <th>Status</th>
+        <th>Filename</th>
+        <th>Action</th>
+    </tr>
+    <tr *ngFor="let document of documents">
+        <td title="'Type'">{{document.type}}</td>
+        <td title="'Status'">
+            <i  [ngClass]="document.status==='Complete' ? 'green' : 'yellow'" class="fa fa-fw fa-circle"></i> {{document.status}}
+        </td>
+        <td title="'Filename'"><a href="" (click)="downloadFile(file.path,file.name,file.type)">{{document.filename}}</a></td>
+        <td title="'Action'" [ngSwitch]="document.status">
+            <button *ngSwitchCase="'Upload Required'" type="button" class="btn btn-link">Upload</button>
+            <button *ngSwitchCase="'Complete'" type="button" (click)="delete(file)" class="btn btn-link">Remove</button>
+            <button *ngSwitchCase="'Complete'" type="button" (click)="removeDocument(document)" class="btn btn-link">Remove</button>
+        </td>
+    </tr>
+</table>
